@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "905715817508",
+    "project_id": "donation-app-46197",
+    "storage_bucket": "donation-app-46197.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:905715817508:android:febe4fea87929190694cb1",
+        "android_client_info": {
+          "package_name": "com.nada.DonationApp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLwLIzSfDPqePrfCov8fv38YP_B2xFaqM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
