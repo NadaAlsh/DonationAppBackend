@@ -5,14 +5,19 @@ import com.nada.DonationApp.entity.DonationRequestEntity;
 import com.nada.DonationApp.entity.DonationStatusEntity;
 import com.nada.DonationApp.entity.DonationTypeEntity;
 import com.nada.DonationApp.entity.UserEntity;
+import com.nada.DonationApp.util.enums.BloodType;
 import com.nada.DonationApp.util.enums.DonationStatus;
 import com.nada.DonationApp.repository.DonationRequestRepository;
 import com.nada.DonationApp.repository.DonationStatusRepository;
 import com.nada.DonationApp.repository.DonationTypeRepository;
 import com.nada.DonationApp.repository.UserRepository;
 import com.nada.DonationApp.service.auth.UserDetailUtil;
+import com.nada.DonationApp.util.enums.DonationType;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,13 +67,55 @@ public class DonationServiceImpl implements DonationService{
         return Optional.empty();
     }
 
-    @Override
-    public DonationRequestEntity updateDonationRequest(Long id, DonationStatus status) {
-        return null;
-    }
+
+
+//    @Override
+//    public DonationRequestEntity updateDonationRequest(Long id, DonationStatus status) {
+//        DonationRequestEntity donationRequestEntity = donationRequestRepository.findById(id)
+//                .orElseThrow(() -> new RuntimeException("Donation request not found"));
+//        DonationStatusEntity donationStatusEntity = donationStatusRepository
+//                .findByDonationStatus(status.name());
+//        // .orElseThrow(() -> new RuntimeException("Donation status not found"));
+//        donationRequestEntity.setDonationStatusEntity(donationStatusEntity);
+//        return donationRequestRepository.save(donationRequestEntity);
+//    }
 
     @Override
     public void deleteDonationRequest(Long id) {
-
+        donationRequestRepository.deleteById(id);
     }
+
+
+
+
+    public void donationStatusChange(Long id){
+        Optional<DonationStatusEntity> donationStatus = donationStatusRepository.findById(id);
+        if (donationStatus.isPresent()){
+            DonationStatusEntity donationStatusEntity = donationStatus.get();
+            donationStatusEntity.setDonationStatus(DonationStatus.DONATED);
+            donationStatusRepository.save(donationStatusEntity);
+        } else {
+            throw new EntityNotFoundException("Donation not found");
+        }
+    }
+  @Override
+    public List<DonationRequestEntity> filterDonations(String bloodType, String donationType, String donationStatus){
+
+        Specification<DonationRequestEntity> specification = Specification.where(null);
+        if (bloodType != null){
+            specification = specification.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.equal(root.get("bloodType"), bloodType));
+        }
+        if (donationType != null){
+            specification = specification.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.equal(root.get("donationType"), donationType));
+        }
+        if (donationStatus != null){
+            specification = specification.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.equal(root.get("donationStatus"), donationStatus));
+        }
+        return donationRequestRepository.findAll((Sort) specification);
+    }
+
+
 }
