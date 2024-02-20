@@ -12,7 +12,6 @@ public class UserEntity {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "fullName", nullable = false)
     private String fullName;
     @Column(name = "username", nullable = false)
@@ -24,13 +23,10 @@ public class UserEntity {
     @Column(name = "bloodType", nullable = false)
     @Enumerated(EnumType.STRING)
     private BloodType bloodType;
-
     @Column(name = "civilId", nullable = false)
     private String civilId;
-
     @Column(name = "password", nullable = false)
     private String password;
-
     @Column(name = "age", nullable = false)
     private int age;
 

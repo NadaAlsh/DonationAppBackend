@@ -1,9 +1,33 @@
 package com.nada.DonationApp.service.user;
 
+import com.nada.DonationApp.entity.UserEntity;
+import com.nada.DonationApp.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    public UserEntity updateUserProfile(Long id, String newEmail, String newPhoneNumber) {
+        UserEntity user = userRepository.findById(id).orElseThrow(() ->
+                new RuntimeException("Donation request not found"));
+
+        if (newEmail != null) {
+            user.setEmail(newEmail);
+        }
+
+        if (newPhoneNumber != null) {
+            user.setPhoneNumber(newPhoneNumber);
+        }
+
+        return userRepository.save(user);
+    }
+
+
+
 //    private final UserRepository userRepository;
 //
 //    private final DonationStatusRepository donationStatusRepository;

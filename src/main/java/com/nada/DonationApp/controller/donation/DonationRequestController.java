@@ -2,7 +2,8 @@ package com.nada.DonationApp.controller.donation;
 
 import com.nada.DonationApp.bo.donation.CreateDonationRequest;
 import com.nada.DonationApp.entity.DonationRequestEntity;
-import com.nada.DonationApp.util.enums.DonationStatus;
+import com.nada.DonationApp.entity.UserEntity;
+import com.nada.DonationApp.service.user.UserServiceImpl;
 import com.nada.DonationApp.service.donation.DonationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,10 @@ public class DonationRequestController {
     @Autowired
     private DonationServiceImpl donationService;
 
-    public DonationRequestController(DonationServiceImpl donationService) {
+    private UserServiceImpl userService;
+
+    public DonationRequestController(DonationServiceImpl donationService, UserServiceImpl userService) {
+        this.userService = userService;
         this.donationService = donationService;
     }
 
@@ -42,17 +46,24 @@ public class DonationRequestController {
        // Optional<DonationEntity> request = donationRequestService.getDonationRequestById(id);
     }
 
-    //@PutMapping("/update")
-    @PutMapping("/{id}/status")
-    public ResponseEntity<DonationRequestEntity> updateDonationRequest(@PathVariable("id") Long id, @RequestParam("Donation Status")DonationStatus status){
-        DonationRequestEntity updatedRequest = donationService.updateDonationRequest(id, status);
+
+    @PutMapping("/{id}/updateProfile")
+    public ResponseEntity<UserEntity> updateUserProfile(@PathVariable("id") Long id, @RequestParam String newEmail, String newPhoneNumber){
+        UserEntity updatedRequest = userService.updateUserProfile(id, newEmail, newPhoneNumber);
         return new ResponseEntity<>(updatedRequest, HttpStatus.OK);
     }
+
 
     @DeleteMapping("/delete")
     public ResponseEntity<Void> deleteDonationRequest(@PathVariable("id") Long id){
         donationService.deleteDonationRequest(id);
        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/{id}/donate")
+    public ResponseEntity<?> donationStatusChange(@PathVariable Long id){
+        donationService.donationStatusChange(id);
+        return ResponseEntity.ok("Donation Status Updated");
     }
 
 }
