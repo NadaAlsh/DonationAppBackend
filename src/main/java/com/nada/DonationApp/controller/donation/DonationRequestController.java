@@ -54,7 +54,7 @@ public class DonationRequestController {
     }
 
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/{id}/delete")
     public ResponseEntity<Void> deleteDonationRequest(@PathVariable("id") Long id){
         donationService.deleteDonationRequest(id);
        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
