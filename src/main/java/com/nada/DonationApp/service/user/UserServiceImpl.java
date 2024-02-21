@@ -11,7 +11,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserEntity updateUserProfile(Long id, String newEmail, String newPhoneNumber) {
+    public UserEntity updateUserProfile(Long id, String newEmail, String newPhoneNumber, String newUsername, String newPassword) {
         UserEntity user = userRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Donation request not found"));
 
@@ -21,6 +21,12 @@ public class UserServiceImpl implements UserService {
 
         if (newPhoneNumber != null) {
             user.setPhoneNumber(newPhoneNumber);
+        }
+        if (newUsername != null) {
+            user.setUsername(newUsername);
+        }
+        if (newPassword != null) {
+            user.setPassword(newPassword);
         }
 
         return userRepository.save(user);

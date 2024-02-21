@@ -47,19 +47,20 @@ public class DonationServiceImpl implements DonationService{
         UserEntity userEntity=userRepository.findById(UserDetailUtil.userDetails().getId())
                 .orElseThrow();
         DonationRequestEntity donationRequestEntity= new DonationRequestEntity();
-
         donationRequestEntity.setFileNumber(donationRequest.getFileNumber());
         donationRequestEntity.setDonationTypeEntity(donationTypeEntity);
         donationRequestEntity.setDonationStatusEntity(donationStatusEntity);
         donationRequestEntity.setUserEntity(userEntity);
+        donationRequestEntity.setResearchPurposeDonation(donationRequest.getResearchPurposeDonation());
         donationRequestEntity.setBloodType(String.valueOf(userEntity.getBloodType()));
+        //donationRequestEntity.setGender(String.valueOf(userEntity.getGender()));
         donationRequestRepository.save(donationRequestEntity);
     }
 
     @Override
     public List<DonationRequestEntity> getAllDonationRequests() {
 
-        return null;
+        return donationRequestRepository.findAll();
     }
 
     @Override
@@ -68,17 +69,6 @@ public class DonationServiceImpl implements DonationService{
     }
 
 
-
-//    @Override
-//    public DonationRequestEntity updateDonationRequest(Long id, DonationStatus status) {
-//        DonationRequestEntity donationRequestEntity = donationRequestRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException("Donation request not found"));
-//        DonationStatusEntity donationStatusEntity = donationStatusRepository
-//                .findByDonationStatus(status.name());
-//        // .orElseThrow(() -> new RuntimeException("Donation status not found"));
-//        donationRequestEntity.setDonationStatusEntity(donationStatusEntity);
-//        return donationRequestRepository.save(donationRequestEntity);
-//    }
 
     @Override
     public void deleteDonationRequest(Long id) {

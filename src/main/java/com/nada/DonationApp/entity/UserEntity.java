@@ -1,6 +1,7 @@
 package com.nada.DonationApp.entity;
 
 import com.nada.DonationApp.util.enums.BloodType;
+import com.nada.DonationApp.util.enums.Gender;
 
 import javax.persistence.*;
 
@@ -29,7 +30,9 @@ public class UserEntity {
     private String password;
     @Column(name = "age", nullable = false)
     private int age;
-
+    @Column(name = "gender", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @OneToOne
     @JoinColumn(name = "role_id")
@@ -114,6 +117,14 @@ public class UserEntity {
 
     public void setBloodType(BloodType bloodType) {
         this.bloodType = bloodType;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }
 
