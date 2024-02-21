@@ -26,7 +26,7 @@ public class DonationRequestController {
         this.donationService = donationService;
     }
 
-    @GetMapping
+    @GetMapping("/getAllRequests")
     public ResponseEntity<List<DonationRequestEntity>> getAllDonationRequests(){
         List<DonationRequestEntity> donationRequests = donationService.getAllDonationRequests();
         return new ResponseEntity<>(donationRequests, HttpStatus.OK);
@@ -48,8 +48,8 @@ public class DonationRequestController {
 
 
     @PutMapping("/{id}/updateProfile")
-    public ResponseEntity<UserEntity> updateUserProfile(@PathVariable("id") Long id, @RequestParam String newEmail, String newPhoneNumber){
-        UserEntity updatedRequest = userService.updateUserProfile(id, newEmail, newPhoneNumber);
+    public ResponseEntity<UserEntity> updateUserProfile(@PathVariable("id") Long id, @RequestParam String newEmail, String newPhoneNumber, String newUsername, String newPassword){
+        UserEntity updatedRequest = userService.updateUserProfile(id, newEmail, newPhoneNumber, newUsername, newPassword);
         return new ResponseEntity<>(updatedRequest, HttpStatus.OK);
     }
 

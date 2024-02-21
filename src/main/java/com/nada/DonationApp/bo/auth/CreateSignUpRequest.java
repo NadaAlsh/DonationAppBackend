@@ -9,8 +9,9 @@ public class CreateSignUpRequest {
     private String bloodType;
     private String password;
     private String civilId;
-    private String fileNumber;
     private int age;
+
+    private String gender;
 
     public String getUsername() {
         return username;
@@ -68,13 +69,6 @@ public class CreateSignUpRequest {
         this.civilId = civilId;
     }
 
-    public String getFileNumber() {
-        return fileNumber;
-    }
-
-    public void setFileNumber(String fileNumber) {
-        this.fileNumber = fileNumber;
-    }
 
     public int getAge() {
         return age;
@@ -82,5 +76,13 @@ public class CreateSignUpRequest {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

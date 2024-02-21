@@ -3,6 +3,8 @@ package com.nada.DonationApp.util.enums;
 public enum BloodType {
     A_POSITIVE("A+"),
     A_NEGATIVE("A-"),
+    B_POSITIVE("B+"),
+    B_NEGATIVE("B-"),
     O_NEGATIVE("O-"),
     O_POSITIVE("O+"),
     AB_NEGATIVE("AB-"),

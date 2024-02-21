@@ -1,5 +1,8 @@
 package com.nada.DonationApp.entity;
 
+import com.nada.DonationApp.util.enums.Gender;
+import com.nada.DonationApp.util.enums.ResearchPurposeDonation;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +18,10 @@ public class DonationRequestEntity {
     private String fileNumber;
 
     private String bloodType;
+
+    @Column(name = "researchPurposeDonation", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ResearchPurposeDonation researchPurposeDonation;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -75,4 +82,13 @@ public class DonationRequestEntity {
     public void setDonationStatusEntity(DonationStatusEntity donationStatusEntity) {
         this.donationStatusEntity = donationStatusEntity;
     }
+
+    public ResearchPurposeDonation getResearchPurposeDonation() {
+        return researchPurposeDonation;
+    }
+
+    public void setResearchPurposeDonation(String researchPurposeDonation) {
+        this.researchPurposeDonation = ResearchPurposeDonation.valueOf(researchPurposeDonation);
+    }
+
 }

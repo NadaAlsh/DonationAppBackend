@@ -14,6 +14,7 @@ import com.nada.DonationApp.exception.UserNotFoundException;
 import com.nada.DonationApp.repository.ResearchResultRepository;
 import com.nada.DonationApp.repository.RoleRepository;
 import com.nada.DonationApp.repository.UserRepository;
+import com.nada.DonationApp.util.enums.Gender;
 import com.nada.DonationApp.util.enums.Roles;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
@@ -56,6 +57,7 @@ public class AuthServiceImpl implements AuthService {
         user.setEmail(createSignupRequest.getEmail());
         user.setCivilId(createSignupRequest.getCivilId());
         user.setAge(createSignupRequest.getAge());
+        user.setGender(Gender.valueOf(createSignupRequest.getGender()));
         user.setBloodType(BloodType.valueOf(createSignupRequest.getBloodType()));
         user.setPassword(bCryptPasswordEncoder.encode(createSignupRequest.getPassword()));
         user.setRoles(roleEntity);
@@ -107,4 +109,5 @@ public class AuthServiceImpl implements AuthService {
         }
     }
 }
+
 

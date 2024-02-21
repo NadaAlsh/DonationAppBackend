@@ -6,6 +6,8 @@ public class CreateDonationRequest {
 
     private String donationType;
 
+    private String researchPurposeDonation;
+
     public String getFileNumber() {
         return fileNumber;
     }
@@ -20,5 +22,13 @@ public class CreateDonationRequest {
 
     public void setDonationType(String donationType) {
         this.donationType = donationType;
+    }
+
+    public String getResearchPurposeDonation() {
+        return researchPurposeDonation;
+    }
+
+    public void setResearchPurposeDonation(String researchPurposeDonation) {
+        this.researchPurposeDonation = researchPurposeDonation;
     }
 }
