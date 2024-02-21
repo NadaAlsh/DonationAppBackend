@@ -14,5 +14,6 @@ public interface UserService {
 //    Optional<UserEntity> findByPhoneNumber(String phoneNumber);
 //
    //void save(UserEntity userEntity);
+    UserEntity getUserById(Long id);
 
 }

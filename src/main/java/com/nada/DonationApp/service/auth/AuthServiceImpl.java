@@ -46,7 +46,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void signup(CreateSignUpRequest createSignupRequest) {
+    public AuthenticationResponse signup(CreateSignUpRequest createSignupRequest) {
 
         RoleEntity roleEntity= roleRepository.findRoleEntityByTitle(Roles.user.name())
                 .orElseThrow();
@@ -62,6 +62,19 @@ public class AuthServiceImpl implements AuthService {
         user.setPassword(bCryptPasswordEncoder.encode(createSignupRequest.getPassword()));
         user.setRoles(roleEntity);
         userRepository.save(user);
+
+        authentication(user.getUsername(), user.getPassword());
+
+        CustomUserDetails userDetails= userDetailService.loadUserByUsername(user.getUsername());
+
+        String accessToken = jwtUtil.generateToken(userDetails);
+
+        AuthenticationResponse response = new AuthenticationResponse();
+        response.setId(userDetails.getId());
+        response.setUsername(userDetails.getUsername());
+        response.setRole(userDetails.getRole());
+        response.setToken("Bearer "+accessToken);
+        return response;
     }
 
 

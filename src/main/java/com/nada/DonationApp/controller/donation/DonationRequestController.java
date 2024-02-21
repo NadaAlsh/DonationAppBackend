@@ -66,4 +66,12 @@ public class DonationRequestController {
         return ResponseEntity.ok("Donation Status Updated");
     }
 
+    @GetMapping("/filter")
+    public List<DonationRequestEntity> filterDonations(
+            @RequestParam(required = false) String bloodType,
+            @RequestParam(required = false) String donationType,
+            @RequestParam(required = false) String donationStatus) {
+
+        return donationService.filterDonations(bloodType, donationType, donationStatus);
+    }
 }
