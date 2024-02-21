@@ -54,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(USER_PATH).hasAuthority("user")
                 .antMatchers(DONATION_PATH).hasAuthority("user")
                 .antMatchers(ADMIN_PATH).hasAuthority("admin")
+                .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/configuration/**", "/webjars/**", "/favicon-**").permitAll()
                 .anyRequest().authenticated();
         http.addFilterBefore(new JWTAuthFilter(jwtUtil,userDetailsService), UsernamePasswordAuthenticationFilter.class);
 
