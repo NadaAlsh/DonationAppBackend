@@ -6,7 +6,7 @@ import com.nada.DonationApp.bo.auth.CreateSignUpRequest;
 import com.nada.DonationApp.bo.auth.LogoutResponse;
 
 public interface AuthService {
-    void signup(CreateSignUpRequest createSignupRequest);
+    AuthenticationResponse signup(CreateSignUpRequest createSignupRequest);
     AuthenticationResponse login(CreateLoginRequest createLoginRequest);
     void logout(LogoutResponse logoutResponse);
 }
