@@ -24,6 +24,6 @@ public interface DonationService {
     List<DonationRequestEntity> filterDonations(String bloodType, String donationType, String donationStatus);
 
 
-
+    void donationStatusChange(Long id);
 
 }

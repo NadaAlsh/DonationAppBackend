@@ -60,7 +60,7 @@ public class DonationRequestController {
        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/{id}/donate")
+    @PatchMapping("/{id}/update-status")
     public ResponseEntity<?> donationStatusChange(@PathVariable Long id){
         donationService.donationStatusChange(id);
         return ResponseEntity.ok("Donation Status Updated");
