@@ -28,7 +28,7 @@ public class AuthController {
         this.authService = authService;
     }
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody CreateSignUpRequest createSignUpRequest){
+    public ResponseEntity<String> signup(@RequestBody CreateSignUpRequest createSignUpRequest){
         logger.info("Received request: {}", createSignUpRequest);
         System.out.println(createSignUpRequest);
         authService.signup(createSignUpRequest);

@@ -76,17 +76,11 @@ public class DonationServiceImpl implements DonationService{
     }
 
 
-
-
+    @Override
     public void donationStatusChange(Long id){
-        Optional<DonationStatusEntity> donationStatus = donationStatusRepository.findById(id);
-        if (donationStatus.isPresent()){
-            DonationStatusEntity donationStatusEntity = donationStatus.get();
-            donationStatusEntity.setDonationStatus(DonationStatus.DONATED);
-            donationStatusRepository.save(donationStatusEntity);
-        } else {
-            throw new EntityNotFoundException("Donation not found");
-        }
+        DonationStatusEntity donationStatusEntity=donationStatusRepository.findByDonationStatus(DonationStatus.DONATED.name());
+        DonationRequestEntity donationRequestEntity = donationRequestRepository.findById(id).orElseThrow();
+        donationRequestEntity.setDonationStatusEntity(donationStatusEntity);
     }
   @Override
     public List<DonationRequestEntity> filterDonations(String bloodType, String donationType, String donationStatus){
